@@ -1,0 +1,27 @@
+task installGitHooks(type: Copy) {
+    from new File(rootProject.rootDir, 'pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks') }
+}
+
+task gitExecutableHooks {
+    doFirst {
+        println "gitExecutableHooks..."
+        Runtime.getRuntime().exec("chmod 755 .git/hooks/pre-commit");
+    }
+}
+
+task verifyFormat {
+    doFirst {
+        println "verifyFormat..."
+        verifyGoogleJavaFormat.enabled = true
+    }
+}
+
+googleJavaFormat {
+    toolVersion = '1.7'
+}
+
+verifyGoogleJavaFormat.enabled = false
+verifyGoogleJavaFormat.dependsOn(clean)
+build.dependsOn(gitExecutableHooks)
+gitExecutableHooks.dependsOn(installGitHooks)

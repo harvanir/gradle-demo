@@ -1,0 +1,1 @@
+CREATE SEQUENCE seq_order_items START 1 INCREMENT BY 50;

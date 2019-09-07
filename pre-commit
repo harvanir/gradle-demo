@@ -1,0 +1,6 @@
+#!/bin/sh
+#sh format-code.sh #option 1 (find diff java files then format)
+#./gradlew goJF #option 2 (format java files)
+#./gradlew verGJF #option 3 (validate only java files)
+#./gradlew build #option 4 (run by build task)
+./gradlew clean verifyFormat build #option 5

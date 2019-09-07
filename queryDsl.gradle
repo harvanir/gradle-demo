@@ -1,0 +1,27 @@
+def queryDslOutputDir = file("src/main/generated")
+
+sourceSets {
+    main {
+        java {
+            srcDirs += queryDslOutputDir
+        }
+    }
+}
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = queryDslOutputDir
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+clean {
+    delete queryDslOutputDir
+}
