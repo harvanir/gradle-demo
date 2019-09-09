@@ -12,6 +12,8 @@
 * Flyway DB
 * PostgreSQL
 * Git hooks: pre-commit
+* Jacoco
+* SonarQube
 
 
 ### Gradle command
@@ -30,6 +32,14 @@
 #### Verify Java Code Format
 ```shell script
 ./gradlew clean verifyFormat build
+```
+#### Build & run code coverage (Jacoco)
+```shell script
+./gradlew clean build jacocoTestReport
+```
+#### Build, run Jacoco & Publish to SonarQube
+```shell script
+./gradlew clean sonarqube -Dsonar.login=<<sonarqube user token>>
 ```
 
 ### Commit changes

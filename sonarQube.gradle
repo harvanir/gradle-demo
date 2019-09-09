@@ -1,0 +1,14 @@
+jacoco {
+    toolVersion = "0.7.9"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        html.enabled true
+        csv.enabled false
+    }
+}
+
+tasks.findByName('sonarqube').dependsOn(jacocoTestReport)
+tasks.findByName('jacocoTestReport').dependsOn(build)
