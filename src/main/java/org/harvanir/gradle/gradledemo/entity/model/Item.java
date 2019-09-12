@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Proxy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,6 +26,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 /** @author Harvan Irsyadi */
 @Getter
 @Setter
+@DynamicUpdate
+@Proxy(lazy = false)
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = TableConstant.ITEMS)

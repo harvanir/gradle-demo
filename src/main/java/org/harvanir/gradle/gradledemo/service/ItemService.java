@@ -15,4 +15,6 @@ public interface ItemService {
   ItemResponse create(CreateItemRequest createItemRequest);
 
   ItemResponse findById(Long id);
+
+  ItemResponse increase(Long id, int decrement);
 }

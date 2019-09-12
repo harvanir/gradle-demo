@@ -6,10 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "test.configuration")
-public class TestProperties {
-
-  private String value;
+@ConfigurationProperties(prefix = "app.configuration")
+public class AppProperties {
 
   private Retry retry = new Retry();
 

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,5 +40,10 @@ public class ItemController {
   @GetMapping("/{id}")
   public ItemResponse find(@PathVariable Long id) {
     return itemService.findById(id);
+  }
+
+  @PutMapping("/{id}/increase")
+  public ItemResponse increase(@PathVariable Long id) {
+    return itemService.increase(id, 1);
   }
 }
