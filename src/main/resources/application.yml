@@ -8,7 +8,7 @@ spring:
     hikari:
       driver-class-name: org.postgresql.Driver
       connection-timeout: 30000
-      maximum-pool-size: 100
+      maximum-pool-size: 500
       minimum-idle: 5
       idle-timeout: 600000
       max-lifetime: 1800000
@@ -29,9 +29,11 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL95Dialect
   flyway:
     enabled: true
-test:
+app:
   configuration:
-    value: value1
+    retry:
+      max-attempts: 1000
+      delay: 1
 logging:
   level:
     org:
@@ -40,3 +42,5 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+        internal:
+          ExceptionMapperStandardImpl: off

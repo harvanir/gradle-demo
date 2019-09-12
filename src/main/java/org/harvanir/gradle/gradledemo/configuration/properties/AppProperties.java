@@ -10,4 +10,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class TestProperties {
 
   private String value;
+
+  private Retry retry = new Retry();
+
+  @Getter
+  @Setter
+  static class Retry {
+    long maxAttempts = 1000;
+
+    long delay = 1;
+  }
 }
