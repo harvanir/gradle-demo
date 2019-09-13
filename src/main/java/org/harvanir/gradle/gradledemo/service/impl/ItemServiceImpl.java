@@ -11,9 +11,11 @@ import org.harvanir.gradle.gradledemo.entity.request.CreateItemRequest;
 import org.harvanir.gradle.gradledemo.entity.response.ItemResponse;
 import org.harvanir.gradle.gradledemo.repository.ItemRepository;
 import org.harvanir.gradle.gradledemo.service.ItemService;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
@@ -68,9 +70,9 @@ public class ItemServiceImpl implements ItemService {
   }
 
   @Retryable(
-      value = {Exception.class},
+      value = {StaleObjectStateException.class, ObjectOptimisticLockingFailureException.class},
       maxAttemptsExpression = "${app.retry.max-attempts}",
-      backoff = @Backoff(delayExpression = "${app.retry.max-attempts}"))
+      backoff = @Backoff(delayExpression = "${app.retry.delay}"))
   @Transactional
   @Override
   public ItemResponse increase(Long id, int increment) {

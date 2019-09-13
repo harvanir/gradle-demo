@@ -16,14 +16,12 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Proxy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Setter
-@Proxy(lazy = false)
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = TableConstant.ORDERS)

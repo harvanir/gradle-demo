@@ -25,22 +25,10 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
         format_sql: true
-    show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQL95Dialect
   flyway:
     enabled: true
 app:
-  configuration:
-    retry:
-      max-attempts: 1000
-      delay: 1
-logging:
-  level:
-    org:
-      hibernate:
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
-        internal:
-          ExceptionMapperStandardImpl: off
+  retry:
+    max-attempts: 1000
+    delay: 1
