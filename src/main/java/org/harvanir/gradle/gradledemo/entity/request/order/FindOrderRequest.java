@@ -1,4 +1,4 @@
-package org.harvanir.gradle.gradledemo.entity.request;
+package org.harvanir.gradle.gradledemo.entity.request.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

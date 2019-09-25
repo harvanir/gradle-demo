@@ -35,21 +35,6 @@ public class ResponseEntityExceptionHandlerAdvice {
 
   private static final String ERR_CONCURRENT = "Error due to concurrent requests, please try again";
 
-  @Builder
-  @Getter
-  @Setter
-  private static class ErrorResponse {
-    private Date timestamp;
-
-    private int status;
-
-    private String error;
-
-    private List<String> errors;
-
-    private String path;
-  }
-
   private Object getBody(HttpStatus httpStatus, String errorMessage, ServletWebRequest request) {
     return getBody(request, httpStatus, errorMessage, null);
   }
@@ -121,6 +106,25 @@ public class ResponseEntityExceptionHandlerAdvice {
         request);
   }
 
+  interface ErrorProducer {
+    List<String> getErrors();
+  }
+
+  @Builder
+  @Getter
+  @Setter
+  private static class ErrorResponse {
+    private Date timestamp;
+
+    private int status;
+
+    private String error;
+
+    private List<String> errors;
+
+    private String path;
+  }
+
   static class ExceptionHandlerFactory {
     private ExceptionHandlerFactory() {}
 
@@ -130,10 +134,6 @@ public class ResponseEntityExceptionHandlerAdvice {
       }
       return new EmptyProducer();
     }
-  }
-
-  interface ErrorProducer {
-    List<String> getErrors();
   }
 
   static class EmptyProducer implements ErrorProducer {

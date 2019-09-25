@@ -1,39 +1,32 @@
-package org.harvanir.gradle.gradledemo.controller;
+package org.harvanir.gradle.gradledemo.controller.v1.order;
 
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import org.harvanir.gradle.gradledemo.entity.request.CreateOrderRequest;
-import org.harvanir.gradle.gradledemo.entity.response.OrderResponse;
+import org.harvanir.gradle.gradledemo.controller.v1.ApiPathV1;
+import org.harvanir.gradle.gradledemo.entity.response.order.OrderResponse;
 import org.harvanir.gradle.gradledemo.exception.NotFoundException;
-import org.harvanir.gradle.gradledemo.service.OrderService;
+import org.harvanir.gradle.gradledemo.service.order.OrderQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/orders")
-public class OrderController {
+@RequestMapping(ApiPathV1.V1_ORDERS)
+public class OrderQueryController {
 
-  private OrderService orderService;
+  private OrderQueryService orderQueryService;
 
   @Autowired
-  public void setOrderService(OrderService orderService) {
-    this.orderService = orderService;
-  }
-
-  @PostMapping
-  public OrderResponse create(@Valid @RequestBody CreateOrderRequest createOrderRequest) {
-    return orderService.create(createOrderRequest);
+  public void setOrderQueryService(OrderQueryService orderQueryService) {
+    this.orderQueryService = orderQueryService;
   }
 
   @GetMapping("/id/{id}")
   public OrderResponse findById(@PathVariable @Valid @NotNull Long id) {
-    return orderService
+    return orderQueryService
         .findById(id)
         .orElseGet(
             () -> {
@@ -43,6 +36,6 @@ public class OrderController {
 
   @GetMapping
   public List<OrderResponse> findAll() {
-    return orderService.findAll();
+    return orderQueryService.findAll();
   }
 }

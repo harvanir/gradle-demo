@@ -1,4 +1,4 @@
-package org.harvanir.gradle.gradledemo.entity.request;
+package org.harvanir.gradle.gradledemo.entity.request.order;
 
 /** @author Harvan Irsyadi */
 public enum OrderStatusEnum {

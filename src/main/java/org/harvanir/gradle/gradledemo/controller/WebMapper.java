@@ -2,7 +2,7 @@ package org.harvanir.gradle.gradledemo.controller;
 
 import org.mapstruct.factory.Mappers;
 
-class WebMapper {
+public class WebMapper {
 
   static final WebBeanMapper MAPPER = Mappers.getMapper(WebBeanMapper.class);
 

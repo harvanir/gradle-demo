@@ -1,4 +1,4 @@
-package org.harvanir.gradle.gradledemo.impl;
+package org.harvanir.gradle.gradledemo.service.order.impl;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -7,9 +7,8 @@ import static org.mockito.Mockito.when;
 import java.util.Collections;
 import java.util.List;
 import org.harvanir.gradle.gradledemo.entity.model.Order;
-import org.harvanir.gradle.gradledemo.entity.response.OrderResponse;
+import org.harvanir.gradle.gradledemo.entity.response.order.OrderResponse;
 import org.harvanir.gradle.gradledemo.repository.OrderRepository;
-import org.harvanir.gradle.gradledemo.service.impl.OrderServiceImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,9 +18,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class OrderServiceImplTest {
+public class OrderQueryServiceImplTest {
 
-  @InjectMocks private OrderServiceImpl orderService;
+  @InjectMocks private OrderQueryServiceImpl orderService;
 
   @Mock private OrderRepository orderRepository;
 

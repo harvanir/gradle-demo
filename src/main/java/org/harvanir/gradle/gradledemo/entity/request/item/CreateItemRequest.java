@@ -1,4 +1,4 @@
-package org.harvanir.gradle.gradledemo.entity.request;
+package org.harvanir.gradle.gradledemo.entity.request.item;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;
