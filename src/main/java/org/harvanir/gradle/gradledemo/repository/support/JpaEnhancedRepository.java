@@ -171,33 +171,39 @@ public class JpaEnhancedRepository<T, K extends Serializable>
     return jpaRepositoryDelegate.count();
   }
 
+  @Transactional
   @Override
   public void deleteById(@Nonnull K k) {
     jpaRepositoryDelegate.deleteById(k);
   }
 
+  @Transactional
   @Override
   public void delete(@Nonnull T entity) {
     jpaRepositoryDelegate.delete(entity);
   }
 
+  @Transactional
   @Override
   public void deleteAll(@Nonnull Iterable<? extends T> entities) {
     jpaRepositoryDelegate.deleteAll(entities);
   }
 
+  @Transactional
   @Override
   public void deleteAll() {
     jpaRepositoryDelegate.deleteAll();
   }
 
   @Nonnull
+  @Transactional
   @Override
   public <S extends T> S save(@Nonnull S entity) {
     return jpaRepositoryDelegate.save(entity);
   }
 
   @Nonnull
+  @Transactional
   @Override
   public <S extends T> List<S> saveAll(@Nonnull Iterable<S> entities) {
     return jpaRepositoryDelegate.saveAll(entities);
@@ -214,22 +220,26 @@ public class JpaEnhancedRepository<T, K extends Serializable>
     return jpaRepositoryDelegate.existsById(k);
   }
 
+  @Transactional
   @Override
   public void flush() {
     jpaRepositoryDelegate.flush();
   }
 
   @Nonnull
+  @Transactional
   @Override
   public <S extends T> S saveAndFlush(@Nonnull S entity) {
     return jpaRepositoryDelegate.saveAndFlush(entity);
   }
 
+  @Transactional
   @Override
   public void deleteInBatch(@Nonnull Iterable<T> entities) {
     jpaRepositoryDelegate.deleteInBatch(entities);
   }
 
+  @Transactional
   @Override
   public void deleteAllInBatch() {
     jpaRepositoryDelegate.deleteAllInBatch();
