@@ -1,7 +1,5 @@
 package org.harvanir.gradle.gradledemo.controller.advice;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
@@ -10,14 +8,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.harvanir.gradle.gradledemo.exception.message.ErrorMessageFactory;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,7 +28,7 @@ import org.springframework.web.util.WebUtils;
 @ControllerAdvice
 public class ResponseEntityExceptionHandlerAdvice {
 
-  private static final String ERR_OCCUR = "Error occur";
+  private static final String ERR_OCCUR = "An error occurred.";
 
   private static final String ERR_CONCURRENT = "Error due to concurrent requests, please try again";
 
@@ -100,14 +97,10 @@ public class ResponseEntityExceptionHandlerAdvice {
             request,
             status,
             status.getReasonPhrase(),
-            ExceptionHandlerFactory.getProducer(e).getErrors()),
+            ErrorMessageFactory.getCommand(e).getErrors()),
         new HttpHeaders(),
         status,
         request);
-  }
-
-  interface ErrorProducer {
-    List<String> getErrors();
   }
 
   @Builder
@@ -123,46 +116,5 @@ public class ResponseEntityExceptionHandlerAdvice {
     private List<String> errors;
 
     private String path;
-  }
-
-  static class ExceptionHandlerFactory {
-    private ExceptionHandlerFactory() {}
-
-    static ErrorProducer getProducer(Exception e) {
-      if (e instanceof MethodArgumentNotValidException) {
-        return new MethodArgumentNotValidExceptionErrorProducer(e);
-      }
-      return new EmptyProducer();
-    }
-  }
-
-  static class EmptyProducer implements ErrorProducer {
-
-    @Override
-    public List<String> getErrors() {
-      return Collections.emptyList();
-    }
-  }
-
-  static class MethodArgumentNotValidExceptionErrorProducer implements ErrorProducer {
-    private final Exception exception;
-
-    MethodArgumentNotValidExceptionErrorProducer(Exception exception) {
-      this.exception = exception;
-    }
-
-    @Override
-    public List<String> getErrors() {
-      MethodArgumentNotValidException notValidException =
-          (MethodArgumentNotValidException) exception;
-      BindingResult bindingResult = notValidException.getBindingResult();
-      List<String> errors = new ArrayList<>(bindingResult.getFieldErrors().size());
-
-      for (FieldError fieldError : bindingResult.getFieldErrors()) {
-        errors.add(fieldError.getField() + ": " + fieldError.getDefaultMessage());
-      }
-
-      return errors;
-    }
   }
 }

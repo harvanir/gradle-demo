@@ -1,6 +1,5 @@
 package org.harvanir.gradle.gradledemo.controller.v1.order;
 
-import javax.validation.Valid;
 import org.harvanir.gradle.gradledemo.controller.v1.ApiPathV1;
 import org.harvanir.gradle.gradledemo.entity.request.order.CreateOrderRequest;
 import org.harvanir.gradle.gradledemo.entity.response.order.OrderResponse;
@@ -23,7 +22,7 @@ public class OrderCommandController {
   }
 
   @PostMapping
-  public OrderResponse create(@Valid @RequestBody CreateOrderRequest createOrderRequest) {
+  public OrderResponse create(@RequestBody CreateOrderRequest createOrderRequest) {
     return orderCommandService.create(createOrderRequest);
   }
 }

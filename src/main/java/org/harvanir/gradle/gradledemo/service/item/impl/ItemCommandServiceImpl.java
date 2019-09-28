@@ -14,6 +14,7 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 /** @author Harvan Irsyadi */
 @Service
@@ -26,8 +27,9 @@ public class ItemCommandServiceImpl implements ItemCommandService {
     this.itemRepository = itemRepository;
   }
 
+  @Validated
   @Override
-  public ItemResponse create(CreateItemRequest createItemRequest) {
+  public ItemResponse create(@Validated CreateItemRequest createItemRequest) {
     return MAPPER.toDto(itemRepository.save(MAPPER.toEntity(createItemRequest)));
   }
 

@@ -1,6 +1,5 @@
 package org.harvanir.gradle.gradledemo.controller.v1.item;
 
-import javax.validation.Valid;
 import org.harvanir.gradle.gradledemo.controller.v1.ApiPathV1;
 import org.harvanir.gradle.gradledemo.entity.request.item.CreateItemRequest;
 import org.harvanir.gradle.gradledemo.entity.response.item.ItemResponse;
@@ -26,7 +25,7 @@ public class ItemCommandController {
   }
 
   @PostMapping
-  public ItemResponse create(@Valid @RequestBody CreateItemRequest createItemRequest) {
+  public ItemResponse create(@RequestBody CreateItemRequest createItemRequest) {
     return itemCommandService.create(createItemRequest);
   }
 
