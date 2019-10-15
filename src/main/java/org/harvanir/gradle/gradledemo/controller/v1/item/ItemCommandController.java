@@ -1,7 +1,7 @@
 package org.harvanir.gradle.gradledemo.controller.v1.item;
 
 import org.harvanir.gradle.gradledemo.controller.v1.ApiPathV1;
-import org.harvanir.gradle.gradledemo.entity.request.item.CreateItemRequest;
+import org.harvanir.gradle.gradledemo.entity.request.item.ItemCreateRequest;
 import org.harvanir.gradle.gradledemo.entity.response.item.ItemResponse;
 import org.harvanir.gradle.gradledemo.service.item.ItemCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,8 @@ public class ItemCommandController {
   }
 
   @PostMapping
-  public ItemResponse create(@RequestBody CreateItemRequest createItemRequest) {
-    return itemCommandService.create(createItemRequest);
+  public ItemResponse create(@RequestBody ItemCreateRequest itemCreateRequest) {
+    return itemCommandService.create(itemCreateRequest);
   }
 
   @PutMapping("/{id}/increase")

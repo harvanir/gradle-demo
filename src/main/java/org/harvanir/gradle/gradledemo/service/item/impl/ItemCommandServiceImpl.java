@@ -1,9 +1,8 @@
 package org.harvanir.gradle.gradledemo.service.item.impl;
 
-import static org.harvanir.gradle.gradledemo.entity.EntityMapper.MAPPER;
-
+import org.harvanir.gradle.gradledemo.entity.EntityBeanMapper;
 import org.harvanir.gradle.gradledemo.entity.model.Item;
-import org.harvanir.gradle.gradledemo.entity.request.item.CreateItemRequest;
+import org.harvanir.gradle.gradledemo.entity.request.item.ItemCreateRequest;
 import org.harvanir.gradle.gradledemo.entity.response.item.ItemResponse;
 import org.harvanir.gradle.gradledemo.repository.ItemRepository;
 import org.harvanir.gradle.gradledemo.service.item.ItemCommandService;
@@ -22,15 +21,22 @@ public class ItemCommandServiceImpl implements ItemCommandService {
 
   private ItemRepository itemRepository;
 
+  private EntityBeanMapper mapper;
+
   @Autowired
   public void setItemRepository(ItemRepository itemRepository) {
     this.itemRepository = itemRepository;
   }
 
+  @Autowired
+  public void setMapper(EntityBeanMapper mapper) {
+    this.mapper = mapper;
+  }
+
   @Validated
   @Override
-  public ItemResponse create(@Validated CreateItemRequest createItemRequest) {
-    return MAPPER.toDto(itemRepository.save(MAPPER.toEntity(createItemRequest)));
+  public ItemResponse create(@Validated ItemCreateRequest itemCreateRequest) {
+    return mapper.toDto(itemRepository.save(mapper.toEntity(itemCreateRequest)));
   }
 
   @Retryable(
@@ -43,6 +49,6 @@ public class ItemCommandServiceImpl implements ItemCommandService {
     Item item = itemRepository.getOne(id);
     item.setQuantity(item.getQuantity() + increment);
 
-    return MAPPER.toDto(itemRepository.save(item));
+    return mapper.toDto(itemRepository.save(item));
   }
 }

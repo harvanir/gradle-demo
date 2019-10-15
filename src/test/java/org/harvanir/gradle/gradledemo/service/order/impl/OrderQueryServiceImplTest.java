@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 import java.util.List;
+import org.harvanir.gradle.gradledemo.entity.EntityBeanMapperImpl;
 import org.harvanir.gradle.gradledemo.entity.model.Order;
 import org.harvanir.gradle.gradledemo.entity.response.order.OrderResponse;
 import org.harvanir.gradle.gradledemo.repository.OrderRepository;
@@ -15,14 +16,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/** @author Harvan Irsyadi */
 @RunWith(MockitoJUnitRunner.class)
 public class OrderQueryServiceImplTest {
 
   @InjectMocks private OrderQueryServiceImpl orderService;
 
   @Mock private OrderRepository orderRepository;
+
+  @Spy private EntityBeanMapperImpl mapper;
 
   @After
   public void after() {

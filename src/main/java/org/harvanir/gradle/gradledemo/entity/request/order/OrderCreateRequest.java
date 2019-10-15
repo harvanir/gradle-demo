@@ -1,13 +1,10 @@
 package org.harvanir.gradle.gradledemo.entity.request.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import java.util.Set;
+import lombok.*;
 
+/** @author Harvan Irsyadi */
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +12,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FindOrderRequest {
+public class OrderCreateRequest {
 
-  private Long id;
+  private OrderStatusEnum status;
+
+  private Set<OrderItemCreateRequest> items;
 }

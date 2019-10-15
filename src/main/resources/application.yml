@@ -26,6 +26,7 @@ spring:
           use_jdbc_metadata_defaults: false
         format_sql: true
     database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    show-sql: false
   flyway:
     enabled: true
 app:

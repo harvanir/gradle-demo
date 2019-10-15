@@ -2,19 +2,19 @@ package org.harvanir.gradle.gradledemo.entity.request.order;
 
 /** @author Harvan Irsyadi */
 public enum OrderStatusEnum {
-  PENDING(0),
-  PROCESSING(1),
-  CANCELLED(2),
-  COMPLETED(3),
-  DELIVERED(4);
+  PENDING((short) 0),
+  PROCESSING((short) 1),
+  CANCELLED((short) 2),
+  COMPLETED((short) 3),
+  DELIVERED((short) 4);
 
-  private int code;
+  private short code;
 
-  OrderStatusEnum(int code) {
+  OrderStatusEnum(short code) {
     this.code = code;
   }
 
-  public int getCode() {
+  public short getCode() {
     return code;
   }
 

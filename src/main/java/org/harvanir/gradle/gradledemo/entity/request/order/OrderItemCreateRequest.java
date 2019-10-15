@@ -1,4 +1,4 @@
-package org.harvanir.gradle.gradledemo.entity.request.item;
+package org.harvanir.gradle.gradledemo.entity.request.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;
@@ -12,9 +12,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreateItemRequest {
+public class OrderItemCreateRequest {
 
-  @NotNull private String name;
+  @NotNull private Long id;
 
   @NotNull private Integer quantity;
 
