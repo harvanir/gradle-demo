@@ -2,6 +2,7 @@ package org.harvanir.gradle.gradledemo.entity.request.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Set;
+import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,5 +22,5 @@ public class OrderCreateRequest {
 
   private OrderStatusEnum status;
 
-  private Set<OrderItemCreateRequest> items;
+  @Valid private Set<OrderItemCreateRequest> items;
 }

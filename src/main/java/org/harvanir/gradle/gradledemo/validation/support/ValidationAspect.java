@@ -49,16 +49,47 @@ public class ValidationAspect {
   private Object validateAndProceed(ProceedingJoinPoint proceedingJoinPoint, Annotation annotation)
       throws Throwable { // NOSONAR
     MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
-    Object[] args = proceedingJoinPoint.getArgs();
     Method method = signature.getMethod();
+    Object[] args = proceedingJoinPoint.getArgs();
 
-    for (int i = 0; i < args.length; i++) {
-      if (shouldValidate(method, i, annotation)) {
-        ValidationUtils.validate(validator, args[i]);
-      }
-    }
+    validateArgs(method, annotation, args);
 
     return proceedingJoinPoint.proceed();
+  }
+
+  private void validateArgs(Method method, Annotation annotation, Object[] args) { // NOSONAR
+    // optimization checking
+    if (args.length > 0) {
+      validateArg(method, annotation, args, 0);
+
+      if (args.length > 1) {
+        validateArg(method, annotation, args, 1);
+
+        if (args.length > 2) {
+          validateArg(method, annotation, args, 2);
+
+          if (args.length > 3) {
+            validateArg(method, annotation, args, 3);
+
+            if (args.length > 4) {
+              validateArg(method, annotation, args, 4);
+
+              if (args.length > 5) {
+                for (int i = 5; i < args.length; i++) {
+                  validateArg(method, annotation, args, i);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private void validateArg(Method method, Annotation annotation, Object[] args, int indexArgs) {
+    if (shouldValidate(method, indexArgs, annotation)) {
+      ValidationUtils.validate(validator, args[indexArgs]);
+    }
   }
 
   @Around("@annotation(validated)")
